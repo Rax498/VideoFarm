@@ -1,0 +1,1 @@
+a YouTube clone using React JS, Material-UI, Redux Toolkit, and React Router. Integrated RapidAPI for real-time video updates. Features include categorized videos, dynamic search, personalized channels, seamless video player, and favorites playlist. Enhanced user experience through responsive design.
