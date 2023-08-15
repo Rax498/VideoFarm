@@ -22,7 +22,6 @@ const SearchBar = () => {
         justifyContent: "space-between",
         borderRadius: 10,
         pl: 2,
-        mr: { xs: 2 },
       }}
     >
       <input

@@ -38,8 +38,8 @@ const Feed = () => {
       </Paper>
 
       <Box p={2}>
-        <Typography variant="h4" sx={{ mb: 2 }}>
-          {selectedcategori}{" "}
+        <Typography variant="h5" sx={{ mb: 2 }}>
+          {selectedcategori}
           <span style={{ color: "orange", paddingLeft: "2px" }}>Videos</span>
         </Typography>
         {/* ----------------------   Video feed main section ---------------- */}

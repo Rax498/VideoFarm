@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { demoProfilePicture } from "../utils/constants";
 
 const Channelcard = ({ channelDetail }) => {
-  // console.log(channelDetail);
+  console.log(channelDetail);
   return (
     <Box
       sx={{

@@ -7,7 +7,7 @@ const Loader = () => {
 
   console.log(skeletonArray);
   return (
-    <Grid container spacing={2} justifyContent="center">
+    <Grid container justifyContent="center" mt={3}>
       {skeletonArray.map((index) => {
         return (
           <Box

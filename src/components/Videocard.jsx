@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { add, remove } from "../store/favSlice";
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import VerifiedIcon from "@mui/icons-material/Verified";
 import {
   Typography,
   Card,
@@ -48,7 +49,7 @@ const Videocard = ({ video, removeButtton }) => {
       variant="outlined"
       className="vcard"
       sx={{
-        width: "320px",
+        width: { md: "320px", sm: "320px", xs: "95vw" },
         height: 290,
         overflow: "hidden",
         position: "relative",
@@ -60,7 +61,7 @@ const Videocard = ({ video, removeButtton }) => {
           className="tcard"
           image={snippet?.thumbnails?.high?.url}
           alt={snippet?.title}
-          sx={{ width: "320px", height: "180px" }}
+          sx={{ width: { md: "320px", xs: "95vw" }, height: "180px" }}
         />
       </Link>
 
@@ -94,15 +95,25 @@ const Videocard = ({ video, removeButtton }) => {
             }
           >
             <Typography
-              variant="body2"
               sx={{
+                fontSize: "12px",
+                display: "flex",
+                alignContent: "center",
                 color: colorPallet_2,
                 fontWeight: "bold",
                 "&:hover": { color: "red" },
               }}
             >
-              {snippet?.channelTitle.slice(0, 30) ||
+              {snippet?.channelTitle.slice(0, 30).toUpperCase() ||
                 demoChannelTitle.slice(0, 50)}
+              <VerifiedIcon
+                style={{
+                  color: "goldenrod",
+                  width: 15,
+                  marginLeft: 4,
+                  paddingBottom: "5px",
+                }}
+              />
             </Typography>
           </Link>
           {/* ======== adding to fav button ====== */}

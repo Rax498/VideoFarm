@@ -24,7 +24,16 @@ const Navbar = ({ modechange }) => {
         zIndex: 5,
       }}
     >
-      <Stack direction="row" alignItems="center" py={4} px={2} height="10vh">
+      <Stack
+        direction="row"
+        alignItems="center"
+        py={4}
+        px={2}
+        height="10vh"
+        display="flex"
+        justifyContent="space-between"
+        alignContent="center"
+      >
         {/* ----------------- Logo ------------ */}
 
         <Link to="/">
@@ -32,14 +41,14 @@ const Navbar = ({ modechange }) => {
         </Link>
 
         {/* ------------------- Search Bar --------------- */}
-        <Stack sx={{ ml: { md: 50, xs: 2 } }}>
+        <Stack>
           <SearchBar />
         </Stack>
 
         {/* _-_----------  light/Drakmode button  ------- */}
 
         <Stack direction="row">
-          <IconButton className="theme-btn" onClick={() => handler()}>
+          <IconButton onClick={() => handler()}>
             {newmode ? (
               <LightMode className="nav-Button " />
             ) : (

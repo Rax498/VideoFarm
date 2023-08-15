@@ -21,12 +21,17 @@ const SearchFeed = () => {
   return (
     <Stack
       className="sidepad"
-      sx={{ flexDirection: { sx: "column", md: "row" } }}
+      sx={{
+        flexDirection: { sx: "column", md: "row" },
+        justifyContent: "center",
+      }}
     >
       <Box p={2} sx={{ overflowY: "hidden" }}>
-        <Typography variant="h4" sx={{ color: "white", mb: 2 }}>
-          {searchterm}{" "}
-          <span style={{ color: "orange", paddingLeft: "2px" }}>Videos</span>
+        <Typography variant="h5" sx={{ color: "white", mb: 2 }}>
+          <span style={{ color: "orange", paddingLeft: "2px" }}>
+            Search results for{" "}
+          </span>
+          {searchterm}
         </Typography>
         <Videos videos={videos} />
       </Box>

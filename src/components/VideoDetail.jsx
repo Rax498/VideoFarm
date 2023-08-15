@@ -4,6 +4,9 @@ import { useParams, Link } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { Typography, Box, Stack, Paper } from "@mui/material";
 
+import VerifiedIcon from "@mui/icons-material/Verified";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+
 import { Loader, Videos } from "./";
 import { fetchFromAPI } from "../utils/fetchfromAPI";
 
@@ -34,20 +37,21 @@ const VideoDetail = () => {
     snippet: { title, channelId, channelTitle },
     statistics: { viewCount, likeCount },
   } = videodetail;
+  console.log(videodetail);
 
   return (
-    <Box minHeight="95vh">
+    <Box minHeight="95vh" justifyContent="center">
       <Stack direction={{ xs: "column", md: "row" }}>
-        <Box flex={1} padding={2} Height="80vh">
+        <Box flex={1} padding={2} sx={{ height: { md: "85vh", xs: "40vh" } }}>
           <Paper
-            // variant="outlined"
             elevation={20}
-            sx={{ width: "100%", position: "sticky", top: "100px" }}
+            sx={{ width: "100%", position: "sticky", top: "100px", pb: 2 }}
           >
             <ReactPlayer
               url={`https://www.youtube.com/watch?v=${id}`}
               className="react-player"
               controls
+              playing
             />
 
             <Typography
@@ -65,22 +69,49 @@ const VideoDetail = () => {
               py={0}
               px={2}
             >
-              <Link to={`/channel/${channelId}`}>
-                <Typography
-                  fontSize="15px"
-                  variant={{ sm: "subtitle1", md: "h6" }}
-                  color={colorPallet_2}
+              <Link to={`/channe l/${channelId}`}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                 >
-                  {channelTitle}
-                </Typography>
+                  <Typography
+                    sx={{ fontSize: { md: "18px", xs: "12px" } }}
+                    color={colorPallet_2}
+                  >
+                    {channelTitle}
+                  </Typography>
+                  <VerifiedIcon
+                    style={{
+                      color: "goldenrod",
+                      width: 15,
+                      marginLeft: 4,
+                      paddingTop: "4px",
+                    }}
+                  />
+                </Box>
               </Link>
-              <Stack direction="row" gap="20px" alignItems="center">
-                <Typography variant="body1" color={colorPallet_2}>
+              <Stack direction="row" gap="20px" alignItems="center" pb={1}>
+                <Typography variant="body2" color={colorPallet_2}>
                   {parseInt(viewCount).toLocaleString()} views
                 </Typography>
-                <Typography variant="body1" sx={{ color: colorPallet_2 }}>
-                  {parseInt(likeCount).toLocaleString()} likes
-                </Typography>
+                <Box sx={{ display: "flex", justifyContent: "center" }}>
+                  <Typography
+                    variant="body2"
+                    sx={{ color: colorPallet_2, paddingTop: "4px" }}
+                  >
+                    {parseInt(likeCount).toLocaleString()}
+                  </Typography>
+                  <ThumbUpIcon
+                    style={{
+                      color: "goldenrod",
+                      width: 16,
+                      marginLeft: 4,
+                    }}
+                  />
+                </Box>
               </Stack>
             </Stack>
           </Paper>
@@ -88,6 +119,7 @@ const VideoDetail = () => {
         <Box
           px={2}
           py={{ md: 1, xs: 5 }}
+          display="flex"
           justifyContent="center"
           alignItems="center"
         >

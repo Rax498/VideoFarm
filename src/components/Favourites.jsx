@@ -21,7 +21,7 @@ const Favourites = () => {
     );
   }
   return (
-    <Box height="90vh">
+    <Box minHeight="90vh">
       <Typography
         variant="h4"
         sx={{
