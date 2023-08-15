@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/VideoFarm/static/css/main.d16e4105.css",
-    "main.js": "/VideoFarm/static/js/main.286ff036.js",
+    "main.css": "/VideoFarm/static/css/main.68cf4256.css",
+    "main.js": "/VideoFarm/static/js/main.adb04a57.js",
     "static/media/logoicon.svg": "/VideoFarm/static/media/logoicon.39602d64f0028346ed64aa840c1aa8ee.svg",
     "index.html": "/VideoFarm/index.html",
-    "main.d16e4105.css.map": "/VideoFarm/static/css/main.d16e4105.css.map",
-    "main.286ff036.js.map": "/VideoFarm/static/js/main.286ff036.js.map"
+    "main.68cf4256.css.map": "/VideoFarm/static/css/main.68cf4256.css.map",
+    "main.adb04a57.js.map": "/VideoFarm/static/js/main.adb04a57.js.map"
   },
   "entrypoints": [
-    "static/css/main.d16e4105.css",
-    "static/js/main.286ff036.js"
+    "static/css/main.68cf4256.css",
+    "static/js/main.adb04a57.js"
   ]
 }
