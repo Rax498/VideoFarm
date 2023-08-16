@@ -69,7 +69,7 @@ const VideoDetail = () => {
               py={0}
               px={2}
             >
-              <Link to={`/channe l/${channelId}`}>
+              <Link to={`/channel/${channelId}`}>
                 <Box
                   sx={{
                     display: "flex",

@@ -21,6 +21,7 @@ import {
   demoVideoTitle,
   demoChannelUrl,
 } from "../utils/constants";
+import { Translate } from "@mui/icons-material";
 
 const Videocard = ({ video, removeButtton }) => {
   const {
@@ -61,7 +62,11 @@ const Videocard = ({ video, removeButtton }) => {
           className="tcard"
           image={snippet?.thumbnails?.high?.url}
           alt={snippet?.title}
-          sx={{ width: { md: "320px", xs: "95vw" }, height: "180px" }}
+          sx={{
+            width: { md: "320px", sm: "330px", xs: "95vw" },
+            aspectRatio: 1 / 0.5,
+            // height: "200px",
+          }}
         />
       </Link>
 
@@ -111,7 +116,7 @@ const Videocard = ({ video, removeButtton }) => {
                   color: "goldenrod",
                   width: 15,
                   marginLeft: 4,
-                  paddingBottom: "5px",
+                  paddingBottom: "6.5px",
                 }}
               />
             </Typography>
