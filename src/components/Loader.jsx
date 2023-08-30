@@ -7,14 +7,14 @@ const Loader = () => {
 
   console.log(skeletonArray);
   return (
-    <Grid container justifyContent="center" mt={3}>
+    <Grid container justifyContent="center" mt={3} minHeight="100vh">
       {skeletonArray.map((index) => {
         return (
           <Box
             key={index}
             sx={{
-              width: "320px",
-              height: 290,
+              width: { md: "320px", sm: "330px", xs: "95vw" },
+              aspectRatio: 1 / 0.5,
               margin: "10px",
               padding: "5px",
             }}
@@ -22,7 +22,7 @@ const Loader = () => {
             <Skeleton
               variant="rectangular"
               animation="wave"
-              width={310}
+              width="100%"
               height={150}
             />
             <Box

@@ -21,7 +21,6 @@ import {
   demoVideoTitle,
   demoChannelUrl,
 } from "../utils/constants";
-import { Translate } from "@mui/icons-material";
 
 const Videocard = ({ video, removeButtton }) => {
   const {
@@ -51,7 +50,7 @@ const Videocard = ({ video, removeButtton }) => {
       className="vcard"
       sx={{
         width: { md: "320px", sm: "320px", xs: "95vw" },
-        height: 290,
+        aspectRatio: 1 / 0.9,
         overflow: "hidden",
         position: "relative",
       }}
@@ -63,9 +62,8 @@ const Videocard = ({ video, removeButtton }) => {
           image={snippet?.thumbnails?.high?.url}
           alt={snippet?.title}
           sx={{
-            width: { md: "320px", sm: "330px", xs: "95vw" },
-            aspectRatio: 1 / 0.5,
-            // height: "200px",
+            width: "100%",
+            aspectRatio: 1 / 0.56,
           }}
         />
       </Link>
@@ -75,12 +73,13 @@ const Videocard = ({ video, removeButtton }) => {
         <Link to={videoId ? `/video/${videoId}` : demoVideoUrl}>
           <Typography
             fontSize={12}
+            fontFamily="fantasy"
             sx={{
               color: colorPallet_1,
-              fontWeight: "bold",
+              fontWeight: "700",
             }}
           >
-            {snippet?.title.slice(0, 50) || demoVideoTitle.slice(0, 50)}
+            {snippet?.title || demoVideoTitle.slice(0, 50)}
           </Typography>
         </Link>
         {/* chanel description tab  */}

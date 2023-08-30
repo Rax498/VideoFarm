@@ -11,9 +11,9 @@ const Feed = () => {
   // ---------------------------  fetching details based on selected caterori ---------------------
   useEffect(() => {
     setVideos(null);
-    fetchFromAPI(`search?part=snippet&q=${selectedcategori}`).then((data) =>
-      setVideos(data.items)
-    );
+    fetchFromAPI(
+      `search?part=snippet&regionCode=IN&q=${selectedcategori}`
+    ).then((data) => setVideos(data.items));
   }, [selectedcategori]);
 
   // #282c34

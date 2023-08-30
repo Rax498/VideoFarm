@@ -37,21 +37,40 @@ const VideoDetail = () => {
     snippet: { title, channelId, channelTitle },
     statistics: { viewCount, likeCount },
   } = videodetail;
-  console.log(videodetail);
+
+  const viewConverter = (viewCount) => {
+    if (viewCount >= 1000000) {
+      return (viewCount / 1000000).toFixed(1) + "M";
+    } else if (viewCount >= 1000) {
+      return (viewCount / 1000).toFixed(1) + "K";
+    } else {
+      return viewCount.toString();
+    }
+  };
 
   return (
     <Box minHeight="95vh" justifyContent="center">
       <Stack direction={{ xs: "column", md: "row" }}>
-        <Box flex={1} padding={2} sx={{ height: { md: "85vh", xs: "40vh" } }}>
-          <Paper
-            elevation={20}
-            sx={{ width: "100%", position: "sticky", top: "100px", pb: 2 }}
-          >
+        <Box
+          flex={1}
+          p={1}
+          sx={{
+            height: {
+              md: "85vh",
+              xs: "40vh",
+            },
+            position: { lg: "sticky", md: "sticky", xs: "static" },
+            top: "100px",
+            pb: 1,
+          }}
+        >
+          <Paper elevation={5}>
             <ReactPlayer
               url={`https://www.youtube.com/watch?v=${id}`}
               className="react-player"
               controls
               playing
+              autofocus
             />
 
             <Typography
@@ -93,16 +112,17 @@ const VideoDetail = () => {
                   />
                 </Box>
               </Link>
-              <Stack direction="row" gap="20px" alignItems="center" pb={1}>
+              <Stack direction="row" gap="10px" alignItems="center" pb={1}>
                 <Typography variant="body2" color={colorPallet_2}>
-                  {parseInt(viewCount).toLocaleString()} views
+                  {viewConverter(viewCount)} views
                 </Typography>
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
                   <Typography
                     variant="body2"
                     sx={{ color: colorPallet_2, paddingTop: "4px" }}
                   >
-                    {parseInt(likeCount).toLocaleString()}
+                    {/* {parseInt(likeCount).toLocaleString()} */}
+                    {viewConverter(likeCount)}
                   </Typography>
                   <ThumbUpIcon
                     style={{
