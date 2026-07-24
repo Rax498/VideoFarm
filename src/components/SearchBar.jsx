@@ -10,7 +10,9 @@ const SearchBar = () => {
 
   const Send = (e) => {
     e.preventDefault();
-    navigate(`/search/${searchterm}`);
+    const term = searchterm.trim();
+    if (!term) return;
+    navigate(`/search/${encodeURIComponent(term)}`);
   };
 
   return (
@@ -19,23 +21,29 @@ const SearchBar = () => {
       onSubmit={Send}
       variant="outlined"
       sx={{
+        display: "flex",
+        alignItems: "center",
         justifyContent: "space-between",
         borderRadius: 10,
         pl: 2,
+        transition: "border-color 0.2s ease",
+        "&:focus-within": { borderColor: "primary.main" },
       }}
     >
       <input
         className="search-bar"
         type="text"
+        aria-label="Search videos"
         value={searchterm}
         onChange={(e) => setSearchterm(e.target.value)}
-        placeholder="search"
+        placeholder="Search"
       />
       <IconButton
         type="submit"
+        aria-label="Search"
         sx={{
           p: 1,
-          color: "orange",
+          color: "primary.main",
         }}
       >
         <Search />

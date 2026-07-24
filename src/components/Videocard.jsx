@@ -5,8 +5,10 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { add, remove } from "../store/favSlice";
 
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import VerifiedIcon from "@mui/icons-material/Verified";
+import {
+  Favorite as FavoriteIcon,
+  Verified as VerifiedIcon,
+} from "@mui/icons-material";
 import {
   Typography,
   Card,
@@ -21,6 +23,7 @@ import {
   demoVideoTitle,
   demoChannelUrl,
 } from "../utils/constants";
+import decodeHtml from "../utils/decodeHtml";
 
 const Videocard = ({ video, removeButtton }) => {
   const {
@@ -49,21 +52,48 @@ const Videocard = ({ video, removeButtton }) => {
       variant="outlined"
       className="vcard"
       sx={{
-        width: { md: "320px", sm: "320px", xs: "95vw" },
+        width: "100%",
         aspectRatio: 1 / 0.9,
         overflow: "hidden",
         position: "relative",
+        transition: "border-color 0.2s ease, transform 0.2s ease",
+        "&:hover": {
+          borderColor: "primary.main",
+          transform: "translateY(-2px)",
+        },
       }}
     >
-      {/* thumbnail tab  */}
+      {/* thumbnail tab — hq720 is a sharp true-16:9 image derived from the
+          video id (the API's "high" is a soft 4:3 letterboxed 480px image);
+          falls back to the API url for videos without a 720p thumbnail */}
       <Link to={videoId ? `/video/${videoId}` : demoVideoUrl}>
         <CardMedia
+          component="img"
           className="tcard"
-          image={snippet?.thumbnails?.high?.url}
-          alt={snippet?.title}
+          image={
+            videoId
+              ? `https://i.ytimg.com/vi/${videoId}/hq720.jpg`
+              : snippet?.thumbnails?.high?.url
+          }
+          onError={(e) => {
+            if (e.target.dataset.fellBack) return;
+            e.target.dataset.fellBack = "1";
+            e.target.src = snippet?.thumbnails?.high?.url || "";
+          }}
+          onLoad={(e) => {
+            // ytimg serves a 120px placeholder (HTTP 200) when a video has
+            // no 720p thumbnail — detect it and fall back to the API url
+            if (e.target.naturalWidth >= 200 || e.target.dataset.fellBack)
+              return;
+            e.target.dataset.fellBack = "1";
+            e.target.src = snippet?.thumbnails?.high?.url || "";
+          }}
+          alt={snippet?.title || "Video thumbnail"}
+          loading="lazy"
           sx={{
             width: "100%",
             aspectRatio: 1 / 0.56,
+            objectFit: "cover",
           }}
         />
       </Link>
@@ -72,14 +102,18 @@ const Videocard = ({ video, removeButtton }) => {
         {/* Video description card  */}
         <Link to={videoId ? `/video/${videoId}` : demoVideoUrl}>
           <Typography
-            fontSize={12}
-            fontFamily="fantasy"
+            fontSize={14}
             sx={{
               color: colorPallet_1,
-              fontWeight: "700",
+              fontWeight: 600,
+              lineHeight: 1.4,
+              display: "-webkit-box",
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
             }}
           >
-            {snippet?.title || demoVideoTitle.slice(0, 50)}
+            {decodeHtml(snippet?.title) || demoVideoTitle.slice(0, 50)}
           </Typography>
         </Link>
         {/* chanel description tab  */}
@@ -102,46 +136,43 @@ const Videocard = ({ video, removeButtton }) => {
               sx={{
                 fontSize: "12px",
                 display: "flex",
-                alignContent: "center",
+                alignItems: "center",
                 color: colorPallet_2,
                 fontWeight: "bold",
-                "&:hover": { color: "red" },
+                transition: "color 0.2s ease",
+                "&:hover": { color: "primary.main" },
               }}
             >
-              {snippet?.channelTitle.slice(0, 30).toUpperCase() ||
+              {snippet?.channelTitle?.slice(0, 30) ||
                 demoChannelTitle.slice(0, 50)}
               <VerifiedIcon
                 style={{
                   color: "goldenrod",
                   width: 15,
                   marginLeft: 4,
-                  paddingBottom: "6.5px",
                 }}
               />
             </Typography>
           </Link>
           {/* ======== adding to fav button ====== */}
           <IconButton
+            aria-label={
+              removeButtton || togle
+                ? "Remove from favourites"
+                : "Add to favourites"
+            }
+            onClick={() =>
+              removeButtton ? removehandler(video) : addhandler(video)
+            }
             sx={{
               position: "absolute",
               right: "1px",
             }}
-            variant="outlined"
             size="small"
           >
-            {removeButtton === true ? (
-              <FavoriteIcon
-                onClick={() => removehandler(video)}
-                className="Remove "
-              />
-            ) : (
-              <FavoriteIcon
-                onClick={() => addhandler(video)}
-                className={!togle ? "Add" : "Remove "}
-              />
-            )}
-
-            {/* {!togle ? "Add" : "Remove "} */}
+            <FavoriteIcon
+              className={removeButtton || togle ? "Remove" : "Add"}
+            />
           </IconButton>
         </CardActions>
       </CardContent>

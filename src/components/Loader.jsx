@@ -1,57 +1,38 @@
-import { Box, Grid, Skeleton } from "@mui/material";
 import React from "react";
+import { Box, Skeleton, Stack } from "@mui/material";
 
-const Loader = () => {
-  const count = 6;
-  const skeletonArray = new Array(count).fill(null);
+// One placeholder shaped like a real Videocard: thumbnail, two title
+// lines, then the channel row
+const CardSkeleton = () => (
+  <Box>
+    <Skeleton
+      variant="rounded"
+      animation="wave"
+      sx={{ width: "100%", height: "auto", aspectRatio: "1 / 0.56" }}
+    />
+    <Skeleton animation="wave" sx={{ mt: 1.5, fontSize: 14, width: "90%" }} />
+    <Skeleton animation="wave" sx={{ fontSize: 14, width: "60%" }} />
+    <Stack direction="row" alignItems="center" gap={1} mt={1}>
+      <Skeleton variant="circular" animation="wave" width={28} height={28} />
+      <Skeleton animation="wave" sx={{ fontSize: 12, width: "40%" }} />
+    </Stack>
+  </Box>
+);
 
-  console.log(skeletonArray);
-  return (
-    <Grid container justifyContent="center" mt={3} minHeight="100vh">
-      {skeletonArray.map((index) => {
-        return (
-          <Box
-            key={index}
-            sx={{
-              width: { md: "320px", sm: "330px", xs: "95vw" },
-              aspectRatio: 1 / 0.5,
-              margin: "10px",
-              padding: "5px",
-            }}
-          >
-            <Skeleton
-              variant="rectangular"
-              animation="wave"
-              width="100%"
-              height={150}
-            />
-            <Box
-              sx={{
-                mx: 1,
-                my: 3,
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <Skeleton
-                item
-                animation="wave"
-                variant="circular"
-                width={50}
-                height={50}
-              />
-              <Skeleton
-                variant="rectangular"
-                animation="wave"
-                width={200}
-                height={40}
-              />
-            </Box>
-          </Box>
-        );
-      })}
-    </Grid>
-  );
-};
+// same fluid grid as the real Videos grid, so content lands exactly
+// where the placeholders were
+const Loader = ({ count = 8 }) => (
+  <Box
+    sx={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+      gap: 3,
+    }}
+  >
+    {Array.from({ length: count }, (_, index) => (
+      <CardSkeleton key={index} />
+    ))}
+  </Box>
+);
 
 export default Loader;

@@ -10,6 +10,9 @@ export { default as Videos } from './Videos';
 export { default as Channelcard } from './Channelcard';
 export { default as Videocard } from './Videocard';
 export { default as Loader } from './Loader';
-export {default as Favourites} from './Favourites';
+export { default as Favourites } from './Favourites';
+export { default as Shortsshelf } from './Shortsshelf';
+export { default as Shortscard } from './Shortscard';
+export { default as ErrorState } from './ErrorState';
 // export {default as Menue} from './Menue';
 
