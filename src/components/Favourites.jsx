@@ -1,23 +1,32 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
+import { FavoriteBorder } from "@mui/icons-material";
 import Videos from "./Videos";
 
 const Favourites = () => {
   const videos = useSelector((state) => state.fav.favTab);
   if (videos.length === 0) {
     return (
-      <Typography
-        variant="h4"
+      <Stack
         height="89vh"
-        textAlign="center"
-        display="flex"
         justifyContent="center"
         alignItems="center"
+        gap={2}
       >
-        Favourites List is empty....!
-      </Typography>
+        <FavoriteBorder sx={{ fontSize: 64, color: "primary.main" }} />
+        <Typography variant="h5" fontWeight={600}>
+          No favourites yet
+        </Typography>
+        <Typography color="text.secondary">
+          Tap the heart on any video to save it here.
+        </Typography>
+        <Button component={Link} to="/" variant="contained" sx={{ mt: 1 }}>
+          Browse videos
+        </Button>
+      </Stack>
     );
   }
   return (
@@ -25,12 +34,13 @@ const Favourites = () => {
       <Typography
         variant="h4"
         sx={{
-          color: "orange",
+          color: "primary.main",
+          fontWeight: 700,
           p: 3,
           textAlign: "center",
         }}
       >
-        Favourites Videos
+        Favourite Videos
       </Typography>
       <Videos videos={videos} removeButtton={true} />
     </Box>

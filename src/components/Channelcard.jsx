@@ -5,11 +5,10 @@ import { Link } from "react-router-dom";
 import { demoProfilePicture } from "../utils/constants";
 
 const Channelcard = ({ channelDetail }) => {
-  console.log(channelDetail);
   return (
     <Box
       sx={{
-        width: "320px",
+        width: "100%",
         height: 290,
         textAlign: "center",
       }}
@@ -34,7 +33,7 @@ const Channelcard = ({ channelDetail }) => {
               borderRadius: "50%",
               height: "180px",
               width: "180px",
-              marginLeft: 8,
+              mx: "auto",
             }}
           />
 

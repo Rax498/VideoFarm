@@ -3,55 +3,55 @@ import { Stack, Typography } from "@mui/material";
 import { categories } from "../utils/constants";
 import { useTheme } from "@emotion/react";
 
-const Sidebar = ({ selectedcategori, setSelectedcategori }) => {
+const Sidebar = ({ selectedcategori, setSelectedcategori, collapsed }) => {
   const theme = useTheme();
 
   return (
     <Stack
       direction="row"
+      className={collapsed ? "sidebar-collapsed" : ""}
       sx={{
         overflowY: "auto",
-        height: { sx: "auto", md: "94%" },
+        height: { xs: "auto", md: "94%" },
         flexDirection: { md: "column" },
         scrollBehavior: "smooth",
         my: { md: 2, xs: 0 },
       }}
     >
-      {categories.map((categori) => (
-        <button
-          className="category-btn"
-          onClick={() => {
-            setSelectedcategori(categori.name);
-          }}
-          style={{ background: categori.name === selectedcategori && "orange" }}
-          key={categori.name}
-        >
-          <span
-            style={{
-              color:
-                categori.name === selectedcategori
-                  ? "black"
-                  : theme.palette.primary.main,
-              marginRight: "15px",
+      {categories.map((categori) => {
+        const selected = categori.name === selectedcategori;
+        return (
+          <button
+            className="category-btn"
+            onClick={() => {
+              setSelectedcategori(categori.name);
             }}
+            aria-pressed={selected}
+            title={categori.name}
+            style={{ "--selected-bg": theme.palette.primary.main }}
+            key={categori.name}
           >
-            {categori.icon}
-          </span>
-          <Typography>
             <span
+              className="category-icon"
               style={{
-                color:
-                  categori.name === selectedcategori
-                    ? "black"
-                    : theme.palette.primary.main,
-                marginRight: "10px",
+                color: selected ? "#000" : theme.palette.primary.main,
+              }}
+            >
+              {categori.icon}
+            </span>
+            <Typography
+              className="category-label"
+              sx={{
+                fontSize: 14,
+                fontWeight: 500,
+                color: selected ? "#000" : "text.primary",
               }}
             >
               {categori.name}
-            </span>
-          </Typography>
-        </button>
-      ))}
+            </Typography>
+          </button>
+        );
+      })}
     </Stack>
   );
 };

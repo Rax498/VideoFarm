@@ -3,63 +3,47 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #282c34;
+  font-family: "Inter", "Helvetica", "Arial", sans-serif;
+}
+
+/* pre-hydration fallback only — CssBaseline repaints this per theme mode */
+body {
+  background-color: #0f0f0f;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
 }
 
 a {
   text-decoration: none;
-  color: rgb(241, 238, 238);
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid #fb8c00;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar {
-  width: 0px;
-  height: 0px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(114, 113, 113);
+  background-color: rgba(128, 128, 128, 0.5);
   border-radius: 10px;
-  height: 20px;
 }
 
 ::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
-.category-btn:hover {
-  background-color: rgb(201, 133, 6) !important;
-  color: white !important;
-}
-
-.category-btn:hover span {
-  color: white !important;
-}
-
-.react-player {
-  height: 70vh !important;
-  width: 100% !important;
-}
-.Add {
-  color: rgb(131, 126, 81);
-}
-.Remove {
-  color: red;
-}
-.nav-Button {
-  color: orange;
-  margin: 5px;
-}
-.search-bar {
-  background: transparent;
-  color: rgb(255, 136, 0);
-  border: none;
-  outline: none;
-  width: 200px;
-}
-
 .category-btn {
-  font-weight: bold !important;
-  text-transform: capitalize;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -67,22 +51,85 @@ a {
   background: transparent;
   outline: none;
   border: none;
+  padding: 10px 16px;
+  margin: 6px;
+  border-radius: 10px;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
 
-  padding: 5px 20px;
-  margin: 10px 15px;
-  border-radius: 20px;
-  transition: all 0.3s ease;
+.category-btn[aria-pressed="true"] {
+  background-color: var(--selected-bg);
+}
+
+.category-btn:not([aria-pressed="true"]):hover {
+  background-color: rgba(128, 128, 128, 0.15);
+}
+
+.category-btn:active {
+  transform: scale(0.97);
+}
+
+.category-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+}
+
+/* desktop sidebar: full-width rows with a tight, even rhythm */
+@media (min-width: 900px) {
+  .category-btn {
+    width: 100%;
+    margin: 2px 0;
+  }
+
+  /* collapsed sidebar: icon-only rail, like YouTube */
+  .sidebar-collapsed .category-btn {
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .sidebar-collapsed .category-icon {
+    margin-right: 0;
+  }
+
+  .sidebar-collapsed .category-label {
+    display: none;
+  }
+}
+
+.tcard {
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .tcard:hover {
-  opacity: 0.5;
-  transform: scale(1.01);
+  transform: scale(1.03);
+  opacity: 0.9;
 }
 
-@media screen and (max-width: 900px) {
-  .category-btn {
-    margin: 10px;
-  }
+.react-player {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 16 / 9;
+}
+
+.Add {
+  color: #9e9e9e;
+}
+
+.Remove {
+  color: #e53935;
+}
+
+.search-bar {
+  background: transparent;
+  color: inherit;
+  border: none;
+  outline: none;
+  width: 200px;
+}
+
+.search-bar::placeholder {
+  color: rgba(128, 128, 128, 0.8);
 }
 
 @media screen and (max-width: 600px) {
@@ -90,11 +137,16 @@ a {
     overflow: auto !important;
   }
 
-  .react-player {
-    height: 45vh !important;
-  }
-
   .search-bar {
     width: 120px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

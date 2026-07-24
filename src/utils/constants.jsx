@@ -1,14 +1,16 @@
-import MusicNoteIcon from "@mui/icons-material/MusicNote";
-import HomeIcon from "@mui/icons-material/Home";
-import CodeIcon from "@mui/icons-material/Code";
-import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
-import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
-import SchoolIcon from "@mui/icons-material/School";
-import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
-import CheckroomIcon from "@mui/icons-material/Checkroom";
-import GraphicEqIcon from "@mui/icons-material/GraphicEq";
-import TheaterComedyIcon from "@mui/icons-material/TheaterComedy";
-import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import {
+  MusicNote as MusicNoteIcon,
+  Home as HomeIcon,
+  Code as CodeIcon,
+  OndemandVideo as OndemandVideoIcon,
+  SportsEsports as SportsEsportsIcon,
+  School as SchoolIcon,
+  FaceRetouchingNatural as FaceRetouchingNaturalIcon,
+  Checkroom as CheckroomIcon,
+  GraphicEq as GraphicEqIcon,
+  TheaterComedy as TheaterComedyIcon,
+  FitnessCenter as FitnessCenterIcon,
+} from "@mui/icons-material";
 
 export const logo = "https://icons8.com/icon/nPeh9CwzEpFo/youtube";
 
